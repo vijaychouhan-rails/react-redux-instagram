@@ -1,6 +1,4 @@
 export default function modal(state = [], action) {
-  console.log('============action===========')
-  console.log(action)
   switch(action.type) {
     case 'POST_LIST':
       return state;

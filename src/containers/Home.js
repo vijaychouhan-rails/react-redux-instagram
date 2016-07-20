@@ -9,7 +9,7 @@ import SearchBar from '../../components/SearchBar';
 import PostList from '../../components/PostList';
 import '../styles/app.css';
 
-class App extends React.Component {
+class Home extends React.Component {
   render() {
     return (
       <div>
@@ -42,4 +42,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
