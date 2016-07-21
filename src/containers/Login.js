@@ -28,6 +28,7 @@ class Login extends React.Component {
 
     return(
       <div className="container">
+        { this.props.authenticationError }
         <div className="col-md-6 col-md-offset-3">
           <h2 className="text-center">Log In</h2>
 
@@ -51,8 +52,14 @@ class Login extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    authenticationError: state.auth.errors
+  }
+}
+
 export default reduxForm({
   form: 'login',
   fields: ['email', 'password'],
   validate
-}, null, Actions)(Login);
+}, mapStateToProps, Actions)(Login);

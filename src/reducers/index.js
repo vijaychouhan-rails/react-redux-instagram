@@ -3,6 +3,7 @@ import GifsReducer from './gifs';
 import ModalReducer from './modal';
 import PostListReducer from './postList';
 import AuthReducer from './auth';
+import ErrorReducer from './errors';
 import { reducer as FormReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   gifs: GifsReducer,
   modal: ModalReducer,
   post_list: PostListReducer,
+  errors: ErrorReducer
 });
 
 export default rootReducer;

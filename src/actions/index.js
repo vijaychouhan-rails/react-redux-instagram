@@ -8,16 +8,20 @@ const API_KEY = '&api_key=dc6zaTOxFJmzC';
 export const OPEN_MODAL = 'OPEN_MODAL';
 export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const POST_LIST = 'POST_LIST';
+export const SHOW_ERROR = 'SHOW_ERROR';
 
 export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
+export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 
 export function requestGifs(term = null) {
-  const data = request.get(`${API_URL}${term.replace(/\s/g, '+')}${API_KEY}`);
-
-  return {
-    type: REQUEST_GIFS,
-    payload: data
+  return function(dispatch) {
+    request.get(`${API_URL}${term.replace(/\s/g, '+')}${API_KEY}`).then(response => {
+      dispatch({
+        type: REQUEST_GIFS,
+        payload: response
+      });
+    });
   }
 }
 
@@ -49,17 +53,56 @@ export function loadList() {
   }
 }
 
-export function signInUser()
+export function signInUser(values)
 {
-  browserHistory.push('/favorites');
-  return{
-    type: SIGN_IN_USER
+  return function(dispatch){
+    console.log("values")
+    var formData = new FormData();
+
+    formData.append("email", values.email);
+    formData.append("password", values.password);
+    var request = new Request('http://localhost:3000/login', {
+      method: 'POST', 
+      mode: 'cors', 
+      redirect: 'follow',
+      body: formData
+    });
+
+    fetch(request)
+      .then(function(response){
+        console.log("response")
+        return(response.json());
+      })
+      .then(function(result){
+        console.log("result")
+        if(result.success){
+          localStorage.setItem('auth_token', result.auth_token)
+          dispatch({ type: SIGN_IN_USER } )
+          browserHistory.push('/favorites')  
+        }else{
+          dispatch({ type: SIGN_IN_ERROR, errors: result.errors } ) 
+          dispatch( showError(result.errors) ) 
+        }
+        
+      })
+      .catch(function(error){
+        console.log("Opps...", "Could not fetch" + error);
+      })
   }
 }
 
 export function signOutUser()
 {
+  localStorage.clear();
+  browserHistory.push('/login');
   return{
     type: SIGN_OUT_USER
   } 
+}
+
+export function showError(message) {
+  return {
+    type: SHOW_ERROR,
+    messages: message
+  }
 }

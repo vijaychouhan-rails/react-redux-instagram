@@ -11,7 +11,7 @@ import Favorites from './containers/Favorites';
 import RequireAuth from './containers/RequireAuth';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-const store = configureStore();
+const store = configureStore({errorMessage: 'this is a error message'});
 
 ReactDOM.render(
   <Provider store={store}>

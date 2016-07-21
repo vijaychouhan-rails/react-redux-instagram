@@ -1,10 +1,11 @@
-import { SIGN_IN_USER, SIGN_OUT_USER } from '../actions';
+import { SIGN_IN_USER, SIGN_OUT_USER, SIGN_IN_ERROR } from '../actions';
 
 const intitialState = {
-  authenticated: false
+  authenticated: localStorage.getItem('auth_token') ? true : false,
+  errors: ''
 }
 
-export default function gifs(state = intitialState, action) {
+export default function auth(state = intitialState, action) {
   switch (action.type) {
     case SIGN_IN_USER:
       return {
@@ -13,6 +14,10 @@ export default function gifs(state = intitialState, action) {
     case SIGN_OUT_USER:
       return {
         ...state, authenticated: false
+      };
+    case SIGN_IN_ERROR:
+      return {
+        ...state, errors: action.errors 
       };
     default:
       return state;
