@@ -9,9 +9,12 @@ import Signup from './containers/Signup';
 import Login from './containers/Login';
 import Favorites from './containers/Favorites';
 import RequireAuth from './containers/RequireAuth';
+
+import Posts from './components/PostList';
+
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-const store = configureStore({errorMessage: 'this is a error message'});
+const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
@@ -21,6 +24,7 @@ ReactDOM.render(
         <Route path="signup" component={Signup} />
         <Route path="login" component={Login} />
         <Route path="favorites" component={RequireAuth(Favorites)} />
+        <Route path="posts" component={RequireAuth(Posts)} />
       </Route>
     </Router>
   </Provider>,

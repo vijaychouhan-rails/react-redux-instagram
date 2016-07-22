@@ -6,8 +6,9 @@ import * as Actions from '../actions';
 import GifList from '../../components/GifList';
 import GifModal from '../../components/GifModal';
 import SearchBar from '../../components/SearchBar';
-import PostList from '../../components/PostList';
+import PostList from '../components/PostList';
 import '../styles/app.css';
+import { Button } from 'react-bootstrap';
 
 class Home extends React.Component {
   render() {
@@ -18,21 +19,20 @@ class Home extends React.Component {
         <GifModal modalIsOpen={ this.props.modalIsOpen }
                   selectedGif={ this.props.selectedGif }
                   onRequestClose={ () => this.props.actions.closeModal() } />
-        <PostList onClickFunction={this.props.actions.loadList} posts={ this.props.posts }/>
+        <PostList onClickFunction={ () => this.props.actions.loadList() } posts={this.props.posts} onLikeFunction={ (post) => this.props.actions.likePost(post) } />
       </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  console.log("===mapStateToProps====")
-  console.log(state)
-  console.log("END===mapStateToProps====")
+  console.log("mapStateToProps(state)")
+  console.log(state.postList.posts)
   return {
     gifs: state.gifs.data,
     modalIsOpen: state.modal.modalIsOpen,
     selectedGif: state.modal.selectedGif,
-    posts: state.post_list.posts
+    posts: state.postList.posts
   };
 }
 

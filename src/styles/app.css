@@ -77,3 +77,14 @@ input {
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
 }
+
+
+/*Post page*/
+.post{
+  border: 8px solid #BDB8B8;
+  border-radius: 7px;
+}
+
+.likePost{
+  margin-right: 10px;
+}

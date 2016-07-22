@@ -13,6 +13,8 @@ export const SHOW_ERROR = 'SHOW_ERROR';
 export const SIGN_IN_USER = 'SIGN_IN_USER';
 export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
+export const LIKE_POST = 'LIKE_POST';
+export const LOAD_POST_LIST = 'LOAD_POST_LIST';
 
 export function requestGifs(term = null) {
   return function(dispatch) {
@@ -45,11 +47,24 @@ export function postList() {
 }
 
 export function loadList() {
-  const data = request.get("http://localhost:3000/mytestpost");
-  console.log(data)
-  return {
-    type: 'LOAD_POST_LIST',
-    payload: data
+  return function(dispatch){
+    console.log("loadList data thunk calling");
+    const url = "http://localhost:3000/mytestpost";
+    fetch(url)
+      .then(function(response){
+        return(response.json());
+      })
+      .then(function(data){
+        console.log("data")
+        console.log(data.posts)
+        dispatch({
+          type: 'LOAD_POST_LIST',
+          posts: data.posts
+        })
+      })
+      .catch(function(error){
+        console.log("Opps...", "Could not fetch in loadList" + error);
+      })
   }
 }
 
@@ -104,5 +119,14 @@ export function showError(message) {
   return {
     type: SHOW_ERROR,
     messages: message
+  }
+}
+
+export function likePost(post) {
+  console.log("=============================")
+  console.log(post)
+  return {
+    type: LIKE_POST,
+    post: post
   }
 }

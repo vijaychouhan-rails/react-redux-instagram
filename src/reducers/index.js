@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   form: FormReducer,
   gifs: GifsReducer,
   modal: ModalReducer,
-  post_list: PostListReducer,
+  postList: PostListReducer,
   errors: ErrorReducer
 });
 
