@@ -15,6 +15,7 @@ export const SIGN_OUT_USER = 'SIGN_OUT_USER';
 export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const LIKE_POST = 'LIKE_POST';
 export const LOAD_POST_LIST = 'LOAD_POST_LIST';
+export const LOAD_LIKES = 'LOAD_LIKES';
 
 export function requestGifs(term = null) {
   return function(dispatch) {
@@ -48,19 +49,22 @@ export function postList() {
 
 export function loadList() {
   return function(dispatch){
-    console.log("loadList data thunk calling");
-    const url = "http://localhost:3000/mytestpost";
+    const url = "http://localhost:3000/posts";
     fetch(url)
       .then(function(response){
         return(response.json());
       })
       .then(function(data){
-        console.log("data")
-        console.log(data.posts)
+        dispatch({
+          type: 'LOAD_LIKES',
+          likes: data.likes
+        })
+        
         dispatch({
           type: 'LOAD_POST_LIST',
           posts: data.posts
         })
+
       })
       .catch(function(error){
         console.log("Opps...", "Could not fetch in loadList" + error);
@@ -71,7 +75,6 @@ export function loadList() {
 export function signInUser(values)
 {
   return function(dispatch){
-    console.log("values")
     var formData = new FormData();
 
     formData.append("email", values.email);
@@ -85,11 +88,9 @@ export function signInUser(values)
 
     fetch(request)
       .then(function(response){
-        console.log("response")
         return(response.json());
       })
       .then(function(result){
-        console.log("result")
         if(result.success){
           localStorage.setItem('auth_token', result.auth_token)
           dispatch({ type: SIGN_IN_USER } )
@@ -123,10 +124,28 @@ export function showError(message) {
 }
 
 export function likePost(post) {
-  console.log("=============================")
-  console.log(post)
-  return {
-    type: LIKE_POST,
-    post: post
-  }
+  return function(dispatch){
+    const url = ('http://localhost:3000/'+post.id+'/likes')
+    var request = new Request(url, {
+      method: 'POST', 
+      mode: 'cors', 
+      redirect: 'follow'
+    });
+
+    fetch(request)
+      .then(function(response){
+        return(response.json());
+      })
+      .then(function(result){
+        if(result.success){
+          dispatch({type: LIKE_POST, post: post })
+        }else{
+          console.log("Error", "Could not update like count");
+        }
+      })
+      .catch(function(error){
+        console.log("Opps...", "Could not update like count" + error);
+      })
+
+    }
 }

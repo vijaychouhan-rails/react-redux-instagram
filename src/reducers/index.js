@@ -4,6 +4,7 @@ import ModalReducer from './modal';
 import PostListReducer from './postList';
 import AuthReducer from './auth';
 import ErrorReducer from './errors';
+import LikesReducer from './likes';
 import { reducer as FormReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   gifs: GifsReducer,
   modal: ModalReducer,
   postList: PostListReducer,
-  errors: ErrorReducer
+  errors: ErrorReducer,
+  likes: LikesReducer
 });
 
 export default rootReducer;

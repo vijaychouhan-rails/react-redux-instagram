@@ -3,13 +3,18 @@ import PostPartial from './_Post';
 
 const Posts = React.createClass({
   render() {
-    console.log("this.props.posts");
-    console.log(this.props);
-    console.log(this.props.posts != undefined)
     const _this = this;
+
+    function countLikes(post){
+      if(_this.props.likes==undefined){
+        return 0
+      }
+      return _this.props.likes.filter(function(obj){return obj.post_id==post.id}).length
+    }
+    
     var result = (this.props.posts != undefined) ? 
                    (this.props.posts.map(function(post, index){
-                     return <PostPartial key={index} post={post} onLikeFunction={(post) => _this.props.onLikeFunction(post)} />
+                     return <PostPartial key={index} post={post} onLikeFunction={(post) => _this.props.onLikeFunction(post)} countLikes={(post) => countLikes(post)} />
                    })) : 'Load the the content click on button'
     
     return (
@@ -21,6 +26,7 @@ const Posts = React.createClass({
       </div>
     )
   }
+
 });
 
 export default Posts;
