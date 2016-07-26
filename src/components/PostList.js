@@ -2,6 +2,14 @@ import React from 'react';
 import PostPartial from './_Post';
 
 const Posts = React.createClass({
+
+  componentDidMount: function() {
+    console.log("document did mount")
+    console.log(this.props)
+    this.props.actions.loadList()
+    console.log("document did mount")
+  },
+
   render() {
     const _this = this;
 

@@ -49,6 +49,10 @@ export function postList() {
 
 export function loadList() {
   return function(dispatch){
+    dispatch({
+      type: 'LOADER',
+      isFetching: true
+    })
     const url = "http://localhost:3000/posts";
     fetch(url)
       .then(function(response){
@@ -65,8 +69,17 @@ export function loadList() {
           posts: data.posts
         })
 
+        dispatch({
+          type: 'LOADER',
+          isFetching: false
+        })
+
       })
       .catch(function(error){
+        dispatch({
+          type: 'LOADER',
+          isFetching: false
+        })
         console.log("Opps...", "Could not fetch in loadList" + error);
       })
   }

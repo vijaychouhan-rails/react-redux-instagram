@@ -5,6 +5,7 @@ import PostListReducer from './postList';
 import AuthReducer from './auth';
 import ErrorReducer from './errors';
 import LikesReducer from './likes';
+import LoaderReducer from './loader';
 import { reducer as FormReducer } from 'redux-form';
 
 const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   modal: ModalReducer,
   postList: PostListReducer,
   errors: ErrorReducer,
-  likes: LikesReducer
+  likes: LikesReducer,
+  isFetching: LoaderReducer
 });
 
 export default rootReducer;

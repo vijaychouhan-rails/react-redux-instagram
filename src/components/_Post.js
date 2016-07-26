@@ -4,7 +4,7 @@ const Photo = React.createClass({
   render() {
     const post = this.props.post;
     return(
-      <div className='col-md-3'>
+      <div className='col-md-3 postList'>
         <div className='col-md-11 post'>
           <img src={post.display_src} width={300} height={300} mode='fit' className="img-responsive" alt={post.title}/>
           <p>{post.title}</p>

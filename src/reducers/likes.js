@@ -5,7 +5,6 @@ export default function modal(state = [], action) {
       console.log("Like post");
       console.log(action)
       return [...state, {post_id: action.post.id, user_id: 1111}]
-      return state
     case LOAD_LIKES:
       return [...state, ...action.likes]
     default:

@@ -88,3 +88,7 @@ input {
 .likePost{
   margin-right: 10px;
 }
+
+.postList{
+    height: 300px;
+}
