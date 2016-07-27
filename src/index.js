@@ -9,6 +9,7 @@ import Signup from './containers/Signup';
 import Login from './containers/Login';
 import Favorites from './containers/Favorites';
 import RequireAuth from './containers/RequireAuth';
+import Demo from './components/Demo';
 
 import Posts from './components/PostList';
 
@@ -25,6 +26,7 @@ ReactDOM.render(
         <Route path="login" component={Login} />
         <Route path="favorites" component={RequireAuth(Favorites)} />
         <Route path="posts" component={RequireAuth(Posts)} />
+        <Route path="demo" component={Demo} />
       </Route>
     </Router>
   </Provider>,

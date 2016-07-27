@@ -92,3 +92,7 @@ input {
 .postList{
     height: 300px;
 }
+
+.disBlock{
+    display: 'block';
+}

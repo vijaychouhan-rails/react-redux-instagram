@@ -7,7 +7,6 @@ import GifList from '../../components/GifList';
 import GifModal from '../../components/GifModal';
 import SearchBar from '../../components/SearchBar';
 import PostList from '../components/PostList';
-import '../styles/app.css';
 import { Button } from 'react-bootstrap';
 
 class Home extends React.Component {

@@ -4,7 +4,7 @@ import * as Actions from '../actions';
 
 class Errors extends React.Component {
   renderErrorMessage() {
-    return (<p> {this.props.errorMessages} :: { Math.random() } </p>)
+    return (<p> {this.props.errorMessages} </p>)
   }
 
   render() {
