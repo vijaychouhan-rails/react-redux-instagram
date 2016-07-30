@@ -18,7 +18,8 @@ class Home extends React.Component {
         <GifModal modalIsOpen={ this.props.modalIsOpen }
                   selectedGif={ this.props.selectedGif }
                   onRequestClose={ () => this.props.actions.closeModal() } />
-        <PostList onClickFunction={ () => this.props.actions.loadList() } posts={this.props.posts} likes={this.props.likes} onLikeFunction={ (post) => this.props.actions.likePost(post) } actions={this.props.actions} />
+        <PostList onClickFunction={ () => this.props.actions.loadList() } posts={this.props.posts} likes={this.props.likes} onLikeFunction={ (post) => this.props.actions.likePost(post) } actions={this.props.actions} paginate={this.props.paginate} />
+        {this.props.children}
       </div>
     );
   }
@@ -30,7 +31,8 @@ function mapStateToProps(state) {
     modalIsOpen: state.modal.modalIsOpen,
     selectedGif: state.modal.selectedGif,
     posts: state.postList.posts,
-    likes: state.likes
+    likes: state.likes,
+    paginate: state.paginate
   };
 }
 

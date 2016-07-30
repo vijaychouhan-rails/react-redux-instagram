@@ -1,15 +1,25 @@
 import React from 'react';
 var FontAwesome = require('react-fontawesome');
 import PostPartial from './_Post';
+import { Link } from 'react-router';
+import { Pagination } from 'react-bootstrap';
 
 const Posts = React.createClass({
 
   componentDidMount: function() {
+    console.log("paginate")
     this.props.actions.loadList()
   },
 
   render() {
     const _this = this;
+
+    function handlePagination(event) {
+      console.log("this is eventKey")
+      console.log(event)
+      _this.props.actions.loadList(event)
+    }
+
 
     function countLikes(post){
       if(_this.props.likes==undefined){
@@ -17,6 +27,8 @@ const Posts = React.createClass({
       }
       return _this.props.likes.filter(function(obj){return obj.post_id==post.id}).length
     }
+
+
     
     var result = (this.props.posts != undefined) ? 
                    (this.props.posts.map(function(post, index){
@@ -25,6 +37,18 @@ const Posts = React.createClass({
     
     return (
       <div className="container page-content">
+        <Pagination
+          prev
+          next
+          first
+          last
+          ellipsis
+          boundaryLinks
+          items={this.props.paginate.totalItem}
+          maxButtons={5}
+          activePage={this.props.paginate.activeItem}
+          onSelect={(event) => handlePagination(event)} />
+
         <button className='clickHere' onClick={() => this.props.onClickFunction() }>Refresh</button>
         <div className="row">
           <div className="col-md-3">
@@ -95,6 +119,7 @@ const Posts = React.createClass({
                         </ul>
                       </div>
                     </div>
+
                     { result }
                   </div>
                 </div>

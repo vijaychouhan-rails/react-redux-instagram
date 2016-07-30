@@ -47,13 +47,13 @@ export function postList() {
   }
 }
 
-export function loadList() {
+export function loadList(page=1) {
   return function(dispatch){
     dispatch({
       type: 'LOADER',
       isFetching: true
     })
-    const url = "http://localhost:3000/posts";
+    const url = "http://localhost:3000/posts?page=" + page;
     fetch(url)
       .then(function(response){
         return(response.json());
@@ -66,7 +66,13 @@ export function loadList() {
         
         dispatch({
           type: 'LOAD_POST_LIST',
-          posts: data.posts
+          posts: data.posts,
+          total_post: data.total_post
+        })
+
+        dispatch({
+          type: 'CHANGE_PAGE_NUMBER',
+          activeItem: page
         })
 
         dispatch({

@@ -6,7 +6,9 @@ import AuthReducer from './auth';
 import ErrorReducer from './errors';
 import LikesReducer from './likes';
 import LoaderReducer from './loader';
+import PaginateReducer from './paginate';
 import { reducer as FormReducer } from 'redux-form';
+import { routerReducer } from 'react-router-redux';
 
 const rootReducer = combineReducers({
   auth: AuthReducer,
@@ -16,7 +18,9 @@ const rootReducer = combineReducers({
   postList: PostListReducer,
   errors: ErrorReducer,
   likes: LikesReducer,
-  isFetching: LoaderReducer
+  isFetching: LoaderReducer,
+  routing: routerReducer,
+  paginate: PaginateReducer
 });
 
 export default rootReducer;
