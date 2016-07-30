@@ -49,7 +49,6 @@ const Posts = React.createClass({
           activePage={this.props.paginate.activeItem}
           onSelect={(event) => handlePagination(event)} />
 
-        <button className='clickHere' onClick={() => this.props.onClickFunction() }>Refresh</button>
         <div className="row">
           <div className="col-md-3">
             <div className="profile-nav">

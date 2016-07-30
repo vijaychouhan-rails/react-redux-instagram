@@ -72,7 +72,8 @@ export function loadList(page=1) {
 
         dispatch({
           type: 'CHANGE_PAGE_NUMBER',
-          activeItem: page
+          activeItem: page,
+          totalItem: data.total_items
         })
 
         dispatch({
